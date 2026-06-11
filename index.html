@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GibzzPorto - Portfolio Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- STYLE GUIDE & VARIABLES --- */
+        :root {
+            --bg-space: #0B0C10;
+            --bg-lab: #12171E;
+            --bg-card: rgba(31, 40, 51, 0.4);
+            --cyan-electric: #66FCF1;
+            --purple-neon: #8A2BE2;
+            --text-main: #F4F6F9;
+            --text-muted: #94A3B8;
+            --border-glow: rgba(102, 252, 241, 0.2);
+        }
+
+        /* --- BASE RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-space);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle Noise/Star Field Effect Background */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(11, 12, 16, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: var(--cyan-electric);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        nav ul a:hover, nav ul a.active {
+            color: var(--cyan-electric);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--cyan-electric);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--cyan-electric);
+            box-shadow: 0 0 10px rgba(102, 252, 241, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--cyan-electric);
+            color: var(--bg-space);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #FFFFFF, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan-electric), #48c6ef);
+            color: var(--bg-space);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 252, 241, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 252, 241, 0.5);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- SHOWCASE SECTION --- */
+        .showcase {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px; left: 0;
+            width: 40px; height: 3px;
+            background-color: var(--cyan-electric);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        /* Project Card Structure */
+        .project-card {
+            background: var(--bg-lab);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        @media (min-width: 900px) {
+            .project-card {
+                flex-direction: row;
+                height: 480px;
+            }
+        }
+
+        .project-card.kosmos-card:hover {
+            border-color: var(--purple-neon);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.15);
+        }
+
+        .project-card.lyora-card:hover {
+            border-color: var(--cyan-electric);
+            box-shadow: 0 10px 30px rgba(102, 252, 241, 0.15);
+        }
+
+        .project-media {
+            flex: 1;
+            background: #080a0f;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-media img {
+            transform: scale(1.03);
+        }
+
+        .lyora-mockup-wrapper {
+            display: flex;
+            gap: 10px;
+            padding: 1.5rem;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            justify-content: center;
+            background: #11161d;
+        }
+
+        .lyora-mockup-wrapper img {
+            width: 45%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-content {
+            flex: 1;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-status {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .tag-web { background: rgba(138, 43, 226, 0.15); color: #b976ff; border: 1px solid rgba(138, 43, 226, 0.3); }
+        .tag-bot { background: rgba(102, 252, 241, 0.15); color: var(--cyan-electric); border: 1px solid rgba(102, 252, 241, 0.3); }
+        .tag-status-live { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+        .tag-status-hold { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+        .project-content h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tech-stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .tech-stack-list span::after {
+            content: " •";
+            margin-left: 0.5rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-stack-list span:last-child::after {
+            content: "";
+        }
+
+        .project-link {
+            align-self: flex-start;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s ease;
+        }
+
+        .kosmos-link { color: #b976ff; }
+        .lyora-link { color: var(--cyan-electric); }
+
+        .project-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* --- TECH STACK & CAPABILITIES SECTION --- */
+        .tech-stack-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .stack-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stack-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 252, 241, 0.3);
+        }
+
+        .stack-box h4 {
+            font-family: 'Fira Code', monospace;
+            color: var(--cyan-electric);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stack-box.purple-box h4 {
+            color: #b976ff;
+        }
+
+        .stack-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stack-box ul li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stack-box ul li i {
+            width: 20px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(31, 40, 51, 0.6), rgba(11, 12, 16, 0.8));
+            border: 1px solid rgba(102, 252, 241, 0.2);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .contact-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-box.wa-link:hover {
+            border-color: #25D366;
+            background: rgba(37, 211, 102, 0.1);
+            color: #25D366;
+        }
+
+        .social-box.gh-link:hover {
+            border-color: var(--cyan-electric);
+            background: rgba(102, 252, 241, 0.1);
+            color: var(--cyan-electric);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .footer-content {
+                flex-direction: row;
+            }
+        }
+
+        .easter-egg {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.3rem; }
+            nav { display: none; }
+            .project-content { padding: 1.5rem; }
+            .lyora-mockup-wrapper { height: 320px; }
+            .social-box { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">GibzzPorto<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills & Labs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-btn" onclick="window.open('https://wa.me/62895365527405', '_blank')">Contact Me</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Turning Logic & AI Into Interactive Realities.</h1>
+        <p>Hi, I'm Gibzz. A digital builder specializing in JavaScript, automation engineering, and full-stack AI environments.</p>
+        <div class="hero-ctas">
+            <a href="#projects" class="btn-primary">Explore My Labs</a>
+            <a href="#contact" class="btn-secondary">Get In Touch</a>
+        </div>
+    </section>
+
+    <section class="showcase" id="projects">
+        <h2 class="section-title">The Main Labs</h2>
+        
+        <div class="project-grid">
+            
+            <div class="project-card kosmos-card">
+                <div class="project-media">
+                    <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80" alt="KosmosPedia Galaxy Interface Preview">
+                </div>
+                <div class="project-content">
+                    <div class="project-status">
+                        <span class="tag tag-web">🌐 Web App</span>
+                        <span class="tag tag-status-live">● Live Product</span>
+                    </div>
+                    <h3>KosmosPedia</h3>
+                    <p>Platform ensiklopedia ruang angkasa modern interaktif yang dibangun menggunakan pendekatan inovatif arsitektur AI Full-Stack. Berfokus pada kecepatan <em>rapid prototyping</em>, kurasi visual kosmis yang imersif, serta optimasi UI yang responsif.</p>
+                    <div class="tech-stack-list">
+                        <span>AI Full-Stack Systems</span>
+                        <span>React</span>
+                        <span>Tailwind CSS</span>
+                        <span>Space API Integrations</span>
+                    </div>
+                    <a href="https://kosmospedia.lovable.app" target="_blank" class="project-link kosmos-link">
+                        Launch Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card lyora-card">
+                <div class="project-media">
+                    <div class="lyora-mockup-wrapper">
+                        <img src="Screenshot_20260524_201831.jpg" alt="Lyora AI Command Menu">
+                        <img src="Screenshot_20260524_201855.jpg" alt="Lyora AI System Info Spec">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div class="project-status">
+                        <span class="tag tag-bot">🤖 Automation</span>
+                        <span class="tag tag-status-hold">● On Hold / Paused</span>
+                    </div>
+                    <h3>LYORA AI</h3>
+                    <p>Asisten virtual pintar berbasis WhatsApp Bot yang dirancang khusus untuk menangani otomatisasi chat, sistem manajemen grup, manajemen edukasi, serta fitur hiburan interaktif bawaan.</p>
+                    <div class="tech-stack-list">
+                        <span>Node.js v24.15.0</span>
+                        <span>Baileys Multi-Device</span>
+                        <span>Local JSON DB</span>
+                        <span>Termux Environment</span>
+                    </div>
+                    <a href="#projects" class="project-link lyora-link" onclick="alert('Proyek saat ini sedang dalam masa optimasi engine arsitektur dan peningkatan infrastruktur hardware.')">
+                        View System Specs <i class="fa-solid fa-microchip"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="tech-stack-section" id="skills">
+        <h2 class="section-title">Core Skills & Capabilities</h2>
+        <div class="stack-grid">
+            
+            <div class="stack-box">
+                <h4><i class="fa-solid fa-code"></i> Programming Languages</h4>
+                <ul>
+                    <li><i class="fa-brands fa-js" style="color: #F7DF1E;"></i> JavaScript (Node.js & Ecosystem)</li>
+                    <li><i class="fa-brands fa-html5" style="color: #E34F26;"></i> HTML5 (Semantic Structure)</li>
+                    <li><i class="fa-brands fa-css3-alt" style="color: #1572B6;"></i> CSS3 & Tailwind Responsive Engine</li>
+                    <li><i class="fa-solid fa-terminal"></i> Shell / Bash Scripting (Termux Env)</li>
+                </ul>
+            </div>
+
+            <div class="stack-box purple-box">
+                <h4><i class="fa-solid fa-cubes"></i> What I Can Build</h4>
+                <ul>
+                    <li><i class="fa-solid fa-robot"></i> <strong>Intelligent Automation:</strong> WhatsApp & Telegram custom AI bots with complex logic trees.</li>
+                    <li><i class="fa-solid fa-globe"></i> <strong>Interactive Web Apps:</strong> Dynamic web platforms with external API integration.</li>
+                    <li><i class="fa-solid fa-bolt"></i> <strong>Rapid Prototyping:</strong> Designing fully structural full-stack frameworks using advanced AI prompts.</li>
+                    <li><i class="fa-solid fa-database"></i> <strong>System Integration:</strong> Caching mechanisms and lightweight database models (JSON/NoSQL).</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-card">
+            <h3>Let's Collaborate</h3>
+            <p>Punya ide proyek otomasi, integrasi bot AI, atau kustomisasi web? Langsung hubungi gw via tautan lab di bawah ini, bre!</p>
+            <div class="social-links">
+                <a href="https://wa.me/62895365527405" target="_blank" class="social-box wa-link">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Line
+                </a>
+                <a href="https://github.com/gibrangeking-ui" target="_blank" class="social-box gh-link">
+                    <i class="fa-brands fa-github"></i> @gibrangeking-ui
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 GibzzPorto. Powered by AI & Coffee.</p>
+            <p class="easter-egg">Built with logic 🗿</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Scroll Tracker for Navbar Navigation Links highlight
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section, div.tech-stack-section, div.contact-section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if ((current === null || current === '') && a.getAttribute('href') === '#') {
+                    a.classList.add('active');
+                } else if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

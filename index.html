@@ -121,27 +121,23 @@
             100% { transform: rotate(-360deg); }
         }
 
-        /* --- CONTAINER UTAMA BISA FADE IN --- */
-        .main-content-app {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .main-content-app.loaded {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- NAVBAR --- */
+        /* --- NAVBAR (FIXED FIXED & SMOOTH INTRO SINKRON) --- */
         header {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            background: rgba(7, 8, 11, 0.7);
+            background: rgba(7, 8, 11, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        header.loaded {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .nav-container {
@@ -187,9 +183,22 @@
             cursor: pointer;
         }
 
+        /* --- CONTAINER UTAMA BISA FADE IN --- */
+        .main-content-app {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+            padding-top: 4rem; /* Ditambah padding biar konten hero gak ketutupan navbar */
+        }
+
+        .main-content-app.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- HERO SECTION --- */
         .hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 4rem);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -415,7 +424,6 @@
         .project-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .project-card:hover .project-media img { transform: scale(1.03); }
 
-        /* Mockup khusus multi-image biar estetik di portofolio */
         .project-mockup-wrapper { display: flex; gap: 10px; padding: 1.5rem; width: 100%; height: 100%; overflow-y: auto; justify-content: center; background: #0b0f14; }
         .project-mockup-wrapper img { width: 45%; height: auto; object-fit: contain; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); }
 
@@ -491,24 +499,25 @@
         </div>
     </div>
 
-    <div class="main-content-app" id="app-wrapper">
-        <header>
-            <div class="nav-container">
-                <a href="#" class="logo">GibzzPorto<span>.</span></a>
-                <nav>
-                    <ul>
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#skills">Skills & Labs</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="nav-btn" onclick="window.open('https://wa.me/62895365527405', '_blank')">Contact Me</button>
-            </div>
-        </header>
+    <header id="header-bar">
+        <div class="nav-container">
+            <a href="#" class="logo">GibzzPorto<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills & Labs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="nav-btn" onclick="window.open('https://wa.me/62895365527405', '_blank')">Contact Me</button>
+        </div>
+    </header>
 
-        <section class="hero">
+    <div class="main-content-app" id="app-wrapper">
+
+        <section class="hero" id="home">
             <h1>Turning Logic & AI Into Interactive Realities.</h1>
             <p>Hi, I'm Gibzz. A digital builder specializing in JavaScript, automation engineering, and full-stack AI environments.</p>
             <div class="hero-ctas">
@@ -526,9 +535,9 @@
                     </div>
                 </div>
                 <div class="about-details">
-                    <h3>Muhammad Gibran Aprillangga(Gibzz)</h3>
+                    <h3>Muhamad Gibran Aprillangga(Gibzz)</h3>
                     <p class="about-bio">
-                        Halo, saya <strong>Muhamad Gibran Aprillangga</strong>. Saya adalah seorang digital content creator, edukator, sekaligus developer asal Indonesia yang mendedikasikan waktu buat nge-eksplorasi integrasi antara kodingan logika, astronomi, dan otomatisasi AI environment. Gw seneng ngebangun ekosistem interaktif dan automasi backend server yang efisien lewat perangkat mobile.
+                        Halo, Saya <strong>Muhamad Gibran Aprillangga</strong>. Saya adalah seorang digital content creator, edukator, sekaligus developer asal Indonesia yang mendedikasikan waktu buat nge-eksplorasi integrasi antara kodingan logika, astronomi, dan otomatisasi AI environment. Gw seneng ngebangun ekosistem interaktif dan automasi backend server yang efisien lewat perangkat mobile.
                     </p>
                     <div class="bio-meta-grid">
                         <div class="meta-item">
@@ -542,12 +551,12 @@
                     </div>
                     <div class="stats-container">
                         <div class="stat-card">
-                            <span class="stat-number">4-6</span>
+                            <span class="stat-number">4</span>
                             <span class="stat-label">Months Exp</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">24</span> <span class="stat-label">Projects
-                            (Some)</span>
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Projects (Some)</span>
                         </div>
                         <div class="stat-card">
                             <span class="stat-number">99%</span>
@@ -564,7 +573,7 @@
                 
                 <div class="project-card cgk-card">
                     <div class="project-media">
-                        <div class="project-mockup-wrapper" style="background: #0d121a;">
+                        <div class="project-mockup-wrapper">
                             <img src="WA_1781349794787.jpeg" alt="CGK MultiTech Home Screen">
                             <img src="WA_1781349797180.jpeg" alt="CGK MultiTech Specialties Section">
                         </div>
@@ -692,6 +701,7 @@
             const counterElement = document.getElementById('load-percentage');
             const overlay = document.getElementById('welcome-overlay');
             const wrapper = document.getElementById('app-wrapper');
+            const headerBar = document.getElementById('header-bar');
             
             let count = 0;
             const interval = setInterval(() => {
@@ -703,13 +713,17 @@
                     setTimeout(() => {
                         overlay.style.opacity = '0';
                         overlay.style.visibility = 'hidden';
+                        
+                        // Aktifkan fade-in halaman utama sekaligus navbarnya
                         wrapper.classList.add('loaded');
+                        headerBar.classList.add('loaded');
                     }, 300);
                 }
                 counterElement.innerText = count + '%';
             }, 50);
         });
 
+        // Highlight Scroll & Active Menu State Tracker
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section, div.tech-stack-section, div.contact-section');
             const navLinks = document.querySelectorAll('nav ul li a');
@@ -717,14 +731,14 @@
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
+                if (window.pageYOffset >= sectionTop - 160) {
                     current = section.getAttribute('id');
                 }
             });
 
             navLinks.forEach(a => {
                 a.classList.remove('active');
-                if ((current === null || current === '') && a.getAttribute('href') === '#') {
+                if ((current === null || current === 'home' || current === '') && a.getAttribute('href') === '#') {
                     a.classList.add('active');
                 } else if (a.getAttribute('href') === `#${current}`) {
                     a.classList.add('active');

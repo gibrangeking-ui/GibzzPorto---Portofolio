@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GibzzPorto - Portfolio Lab</title>
+    <title>GibzzPorto - Portofolio Lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
@@ -413,9 +413,10 @@
         }
 
         @media (min-width: 900px) {
-            .project-card { flex-direction: row; height: 480px; }
+            .project-card { flex-direction: row; min-height: 480px; height: auto; }
         }
 
+        .project-card.tikloader-card:hover { border-color: #FE2C55; box-shadow: 0 10px 30px rgba(254, 44, 85, 0.2); }
         .project-card.cgk-card:hover { border-color: var(--green-emerald); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.15); }
         .project-card.kosmos-card:hover { border-color: var(--purple-neon); box-shadow: 0 10px 30px rgba(155, 81, 224, 0.15); }
         .project-card.lyora-card:hover { border-color: var(--cyan-electric); box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15); }
@@ -435,6 +436,7 @@
         .tag-bengkel { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
         .tag-bot { background: rgba(0, 242, 254, 0.15); color: var(--cyan-electric); border: 1px solid rgba(0, 242, 254, 0.3); }
         .tag-compiler { background: rgba(255, 159, 0, 0.15); color: #ffbf24; border: 1px solid rgba(255, 159, 0, 0.3); }
+        .tag-tools { background: rgba(254, 44, 85, 0.15); color: #ff6e88; border: 1px solid rgba(254, 44, 85, 0.3); }
         .tag-status-live { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
         .tag-status-hold { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
 
@@ -446,6 +448,7 @@
         .tech-stack-list span:last-child::after { content: ""; }
 
         .project-link { align-self: flex-start; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; transition: gap 0.2s ease; }
+        .tikloader-link { color: #ff6e88; }
         .cgk-link { color: var(--green-emerald); }
         .kosmos-link { color: #b976ff; }
         .lyora-link { color: var(--cyan-electric); }
@@ -554,11 +557,11 @@
                     </div>
                     <div class="stats-container">
                         <div class="stat-card">
-                            <span class="stat-number">4</span>
+                            <span class="stat-number">4,3</span>
                             <span class="stat-label">Months Exp</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">25</span>
+                            <span class="stat-number">26</span>
                             <span class="stat-label">Projects (Some)</span>
                         </div>
                         <div class="stat-card">
@@ -573,12 +576,38 @@
         <section class="showcase" id="projects">
             <h2 class="section-title">The Main Labs</h2>
             <div class="project-grid">
+
+                <div class="project-card tikloader-card">
+                    <div class="project-media">
+                        <div class="project-mockup-wrapper" style="background: #090b0e;">
+                            <img src="logo.jpg" alt="Tikloader Application Branding Logo">
+                            <img src="IMG_20260617_210717.jpg" alt="Tikloader Downloader Core Web Interface">
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-status">
+                            <span class="tag tag-tools">🧰 Web Tools</span>
+                            <span class="tag tag-status-live">● Live Product</span>
+                        </div>
+                        <h3>Tikloader</h3>
+                        <p>Platform utilitas web berkecepatan tinggi yang dirancang untuk mengunduh video TikTok tanpa watermark. Menawarkan performa unduhan yang jauh lebih gegas dengan output resolusi ultra HD murni melalui optimasi infrastruktur Private API.</p>
+                        <div class="tech-stack-list">
+                            <span>Private API Integration</span>
+                            <span>High-Speed Scraping</span>
+                            <span>HD Resolution Output</span>
+                            <span>No-Watermark Processing</span>
+                        </div>
+                        <a href="https://tikloader-v1.vercel.app/" target="_blank" class="project-link tikloader-link">
+                            Launch Downloader Tools <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
                 
                 <div class="project-card vibe-card">
                     <div class="project-media">
                         <div class="project-mockup-wrapper" style="background: #0d1117;">
-                            <img src="WA_1781539692872.jpeg" alt="VibeCode Landing page hero">
-                            <img src="WA_1781539691563.jpeg" alt="VibeCode editor love preview">
+                            <img src="WA_1781349791884.jpeg" alt="VibeCode Code Editor Interface">
+                            <img src="WA_1781349793130.jpeg" alt="VibeCode CSS Live Styling Preview">
                         </div>
                     </div>
                     <div class="project-content">
